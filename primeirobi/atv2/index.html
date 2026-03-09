@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atv 2 </title>
+</head>
+<body>
+
+    <h1>Página de Cadastro</h1>
+    
+    <form>
+        <fieldset>
+            <legend>Crie sua conta</legend>
+
+            <label for="user_name">Nome</label><br>
+            <input type="text" name="nome"><br><br>
+
+            <label for="user_email">E-mail</label><br>
+            <input type="email" id="user_email" name="email" placeholder="seuemail@dominio.com" pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+" required><br><br>
+
+            <label for="senha">Senha (mínimo 8 caracteres)</label><br>
+            <input type="password" id="senha" name="senha" minlength="8" required><br><br>
+
+            <p><b>Gênero</b></p>
+
+            <input type="radio" id="feminino" name="genero" value="feminino">
+            <label for="feminino">Feminino</label><br>
+
+            <input type="radio" id="masculino" name="genero" value="masculino">
+            <label for="masculino">Masculino</label><br>
+
+            <input type="radio" id="outro" name="genero" value="outro">
+            <label for="outro">Outro</label><br><br>
+
+            <label for="biografia">Biografia</label><br>
+            <textarea name="biografia" id="biografia" rows="5" placeholder="Fale um pouco sobre você..."></textarea><br><br>
+
+            <input type="checkbox" name="termos" id="termos" required>
+            <label for="termos">Eu li e aceito os termos de serviço.</label>
+            
+        </fieldset>
+            <br>    
+        <button type="submit">Cadastrar</button>
+        <button type="reset">Limpar</button>
+
+    </form>
+</body>
+</html>

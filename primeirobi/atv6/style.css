@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(135deg, #f5e0d3, #fceee6);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 480px;
+}
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #5a3e36;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.input-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#task-input {
+  flex: 1;
+  padding: 0.6rem 0.9rem;
+  border: 2px solid #e8cfc3;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #5a3e36;
+  outline: none;
+  transition: 0.2s;
+}
+
+#task-input::placeholder {
+  color: #c2a39a;
+  font-size: 0.9rem;
+}
+
+#task-input:focus {
+  border-color: #d88c6a;
+}
+
+#add-btn {
+  padding: 0.6rem 1.1rem;
+  background-color: #d88c6a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#add-btn:hover {
+  background-color: #c17656;
+}
+
+#task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#task-list li {
+  background-color: #fff7f3;
+  border: 1px solid #f0d6cc;
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #4d3b3b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.2s;
+}
+
+#task-list li:hover {
+  background-color: #f4a6a6;
+  border-color: #ae0f04;
+  color: #9a1212;
+}
+
+#task-list li::after {
+  content: "✕";
+  font-size: 0.8rem;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+#task-list li:hover::after {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    padding: 1.5rem;
+    border-radius: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .input-row {
+    flex-direction: column; 
+  }
+
+  #task-input {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  #add-btn {
+    width: 100%; 
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  #task-list li {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+}

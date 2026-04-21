@@ -1,0 +1,148 @@
+.container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 480px;
+  height: fit-content;
+}
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #5a3e36;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.input-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-row input {
+  flex: 1;
+  padding: 0.6rem 0.9rem;
+  border: 2px solid #e8cfc3;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: #5a3e36;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-row input::placeholder {
+  color: #c2a39a;
+  font-size: 0.9rem;
+}
+
+.input-row input:focus {
+  border-color: #d88c6a;
+}
+
+.input-row button {
+  padding: 0.6rem 1.1rem;
+  background-color: #d88c6a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.input-row button:hover {
+  background-color: #c17656;
+}
+
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.task-list li {
+  background-color: #fff7f3;
+  border: 1px solid #f0d6cc;
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #4d3b3b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.task-list li:hover {
+  background-color: #fef0ed;
+  border-color: #d88c6a;
+}
+
+.task-list li span {
+  flex: 1;
+  margin-right: 0.75rem;
+  word-break: break-word;
+}
+
+.remove-btn {
+  padding: 0.3rem 0.7rem;
+  background-color: transparent;
+  color: #d88c6a;
+  border: 1px solid #d88c6a;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.remove-btn:hover {
+  background-color: #c0392b;
+  border-color: #c0392b;
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem;
+    border-radius: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .input-row input {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .input-row button {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  .task-list li {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+}

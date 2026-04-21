@@ -3,7 +3,7 @@ function Article({ post }) {
     <article>
       <h2>{post.titulo}</h2>
       
-      <p className="autor"><em>Escrito por: {post.autor}</em></p>
+      <p className="autor">Escrito por: {post.autor}</p>
 
       <time dateTime={post.data}>{post.data}</time>
 

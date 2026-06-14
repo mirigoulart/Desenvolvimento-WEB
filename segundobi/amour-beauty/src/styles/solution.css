@@ -1,0 +1,97 @@
+/* ── Seção principal ── */
+#services {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 4rem;
+    gap: 5.75rem;
+}
+
+/* ── Cabeçalho ── */
+#services header {
+    display: grid;
+    gap: 1.5rem;
+    text-align: center;
+    max-width: 33rem;
+}
+
+/* ── Parágrafo ── */
+#services p {
+    color: var(--second-text-color);
+}
+
+/* ── Destaque (nome do salão) ── */
+#services strong {
+    color: var(--primary-color);
+    font-weight: var(--fw-bold);
+}
+
+/* ── Espaçamento das colunas ── */
+#services .even-columns {
+    gap: 2rem;
+}
+
+/* ── Cards ── */
+.card {
+    background: var(--light-gray);
+    box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+    max-width: 20.25rem;
+    min-height: 26rem;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: rgba(200, 96, 122, 0.25) 0px 16px 32px;
+}
+
+.card > span {
+    display: flex;
+    min-height: 8rem;
+    align-items: flex-end;
+}
+
+.card > div {
+    height: 100%;
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* ── Título do card ── */
+.card h3 {
+    font-size: 1.5rem;
+}
+
+/* ── Parágrafo do card ── */
+.card p {
+    padding-inline: 1.5rem;
+    color: var(--second-text-color);
+}
+
+/* ── Linha decorativa do card ── */
+.card hr {
+    height: 6px;
+    background: var(--secondary-color);
+    width: 100%;
+    border: none;
+}
+
+/* ── Desktop ── */
+@media (width >= 1280px) {
+    #services {
+        padding-block: 7.5rem;
+    }
+
+    #solution header > span > h2 {
+        font-size: var(--fs-sm);
+        color: var(--primary-color);
+    }
+}

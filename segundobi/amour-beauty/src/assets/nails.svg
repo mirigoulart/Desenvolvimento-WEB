@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <circle cx="32" cy="32" r="30" fill="#F9EFF2"/>
+  <!-- mão / dedos -->
+  <rect x="22" y="30" width="6" height="20" rx="3" fill="#C8607A" opacity="0.9"/>
+  <rect x="29" y="26" width="6" height="24" rx="3" fill="#C8607A" opacity="0.9"/>
+  <rect x="36" y="28" width="6" height="22" rx="3" fill="#C8607A" opacity="0.9"/>
+  <!-- esmalte nas unhas -->
+  <rect x="22" y="28" width="6" height="7" rx="3" fill="#C9A96E"/>
+  <rect x="29" y="24" width="6" height="7" rx="3" fill="#C9A96E"/>
+  <rect x="36" y="26" width="6" height="7" rx="3" fill="#C9A96E"/>
+  <!-- base da palma -->
+  <rect x="20" y="46" width="24" height="6" rx="3" fill="#A04060" opacity="0.7"/>
+</svg>

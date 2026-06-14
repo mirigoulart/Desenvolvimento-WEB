@@ -1,0 +1,85 @@
+/* ── Padding vertical ── */
+.py-sm {
+    padding-block: var(--py-sm);
+}
+
+.py-base {
+    padding-block: var(--py-base);
+}
+
+.py-lg {
+    padding-block: var(--py-lg);
+}
+
+.py-xl {
+    padding-block: var(--py-xl);
+}
+
+/* ── Padding horizontal ── */
+.px-lg {
+    padding-inline: var(--px-lg);
+}
+
+/* ── Visibilidade ── */
+.desktop-only {
+    display: none;
+}
+
+/* ── Layout ── */
+.even-columns {
+    display: grid;
+    gap: 1rem;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.flex {
+    display: flex;
+}
+
+.grid {
+    display: grid;
+}
+
+/* ── Espaçamentos ── */
+.gap-1 {
+    gap: 1rem;
+}
+
+.gap-1\.5 {
+    gap: 1.5rem;
+}
+
+.btn-wrapper {
+    cursor: pointer;
+    padding: 2px;
+}
+
+/* ── Container responsivo ── */
+.container {
+    --max-width: 680px;
+    width: min(var(--max-width), 100% - var(--px-lg) * 2);
+    margin-inline: auto;
+}
+
+/* ── Media queries desktop ── */
+@media (width >= 1280px) {
+    .container {
+        --max-width: 1050px;
+    }
+
+    .desktop-only {
+        display: initial;
+    }
+
+    .even-columns {
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+    }
+}

@@ -42,7 +42,7 @@
 .mobile-menu-content a {
     font-size: var(--fs-lg);
     color: var(--text-color);
-    font-family: var(--ff-serif);
+    font-family: 'Montserrat', sans-serif;
     font-weight: var(--fw-bold);
     transition: color 0.25s;
 }

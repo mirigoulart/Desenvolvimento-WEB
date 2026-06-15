@@ -7,6 +7,9 @@ import HairIcon from "../assets/hair.svg"
 import NailsIcon from "../assets/nails.svg"
 import AestheticsIcon from "../assets/aesthetics.svg"
 import Check from "../assets/check.svg"
+import ArianaImg from "../assets/images/ariana.jpg"
+import EmmaImg from "../assets/images/emma.jpg"
+import ZendayaImg from "../assets/images/zendaya.jpg"
 import Button from "../components/Button"
 import Card from "../components/Card"
 import TestimonialCard from "../components/TestimonialCard"
@@ -25,6 +28,12 @@ import Youtube from "../assets/youtube.svg"
 export default function Home() {
     const [showMobileMenu, setShowMobileMenu] = useState(false)
 
+    // ── Estados do formulário de contato ──
+    const [contactEmail, setContactEmail] = useState("")
+    const [contactMessage, setContactMessage] = useState("")
+    const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
+    const [formError, setFormError] = useState("")
+
     // ── Melhoria: trava o scroll do HTML quando o menu mobile está aberto ──
     useEffect(() => {
         const html = document.querySelector("html")
@@ -32,6 +41,34 @@ export default function Home() {
             html.style.overflow = showMobileMenu ? "hidden" : "auto"
         }
     }, [showMobileMenu])
+
+    // ── Envio de e-mail via Netlify Function ──
+    async function sendContactEmail(e: React.FormEvent) {
+        e.preventDefault()
+        setFormStatus("sending")
+        setFormError("")
+
+        try {
+            const response = await fetch("/api/send-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: contactEmail, message: contactMessage }),
+            })
+
+            if (!response.ok) {
+                const body = await response.json().catch(() => ({}))
+                throw new Error(body.error ?? "Erro ao enviar mensagem.")
+            }
+
+            setFormStatus("success")
+            setContactEmail("")
+            setContactMessage("")
+        } catch (err: unknown) {
+            const msg = err instanceof Error ? err.message : "Erro inesperado."
+            setFormError(msg)
+            setFormStatus("error")
+        }
+    }
 
     return (
         <>
@@ -54,7 +91,7 @@ export default function Home() {
                                 <a href="#testimonials">Depoimentos</a>
                             </li>
                             <li>
-                                <a href="#pricing">Preços</a>
+                                <a href="#pricing">Planos</a>
                             </li>
                             <li>
                                 <a href="#contact">Contato</a>
@@ -235,21 +272,21 @@ export default function Home() {
                         {/* Segunda cópia para loop infinito ── */}
                         <div className="carousel-content">
                             <TestimonialCard
-                                profileImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_9RV36uovdWkNPRrXnKDtrv16xN2p0FAfBw&s"
+                                profileImage={ArianaImg}
                                 testimony="Saí completamente transformada! O corte e a coloração ficaram perfeitos. Nunca me senti tão bonita. Super recomendo!"
                                 stars={5}
                                 name="Ariana Grande"
                                 role="Cliente Fiel"
                             />
                             <TestimonialCard
-                                profileImage="https://beautyeditor.com.br/wp-content/uploads/2017/02/beleza-beauty-editor-acontece-oscar-2017-cabelo-e-maquiagem-emma-stone-oscars-2017-red-carpet.jpg"
+                                profileImage={EmmaImg}
                                 testimony="Fiz as unhas em gel e simplesmente amei! A profissional foi muito atenciosa e caprichosa em cada detalhe. Voltarei sempre!"
                                 stars={5}
                                 name="Emma Stone"
                                 role="Primeira Visita"
                             />
                             <TestimonialCard
-                                profileImage="https://marciatravessoni.com.br/wp-content/uploads/2022/09/zendaya_272350445_470989791066853_8963836764632250176_n.jpg"
+                                profileImage={ZendayaImg}
                                 testimony="Tratamento de pele incrível! Minha pele nunca esteve tão hidratada e brilhante. O ambiente é lindíssimo e o atendimento é ótimo."
                                 stars={4}
                                 name="Zendaya"
@@ -373,18 +410,40 @@ export default function Home() {
                         </p>
                     </header>
 
-                    <form onSubmit={(e) => e.preventDefault()}>
+                    <form onSubmit={sendContactEmail}>
                         <input
                             type="email"
                             placeholder="Seu melhor Email"
                             id="contact-email"
+                            value={contactEmail}
+                            onChange={(e) => setContactEmail(e.target.value)}
                             required
+                            disabled={formStatus === "sending"}
                         />
                         <textarea
                             placeholder="Motivo do contato. Ex: Gostaria de agendar uma coloração, qual o valor?"
                             id="contact-message"
+                            value={contactMessage}
+                            onChange={(e) => setContactMessage(e.target.value)}
+                            required
+                            disabled={formStatus === "sending"}
                         />
-                        <Button text="Enviar" />
+
+                        {/* Feedback de status */}
+                        {formStatus === "success" && (
+                            <p className="form-feedback form-success">
+                                ✔ Mensagem enviada com sucesso! Entraremos em contato em breve.
+                            </p>
+                        )}
+                        {formStatus === "error" && (
+                            <p className="form-feedback form-error">
+                                ⚠️ {formError}
+                            </p>
+                        )}
+
+                        <Button
+                            text={formStatus === "sending" ? "Enviando..." : "Enviar"}
+                        />
                     </form>
 
                 </section>

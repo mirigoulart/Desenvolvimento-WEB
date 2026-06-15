@@ -61,7 +61,7 @@
     margin-bottom: 20%;
 }
 
-/* ── Spans dentro do container de botões (só os visíveis no mobile) ── */
+/* ── Span do botão visível no mobile ── */
 #hero .content > div > span:not(.desktop-only) {
     display: flex;
     align-items: center;

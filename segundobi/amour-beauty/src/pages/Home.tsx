@@ -13,6 +13,7 @@ import ZendayaImg from "../assets/images/zendaya.jpg"
 import Button from "../components/Button"
 import Card from "../components/Card"
 import TestimonialCard from "../components/TestimonialCard"
+import ContactForm from "../components/ContactForm"
 import "../styles/header.css"
 import "../styles/utility.css"
 import "../styles/hero.css"
@@ -28,47 +29,12 @@ import Youtube from "../assets/youtube.svg"
 export default function Home() {
     const [showMobileMenu, setShowMobileMenu] = useState(false)
 
-    // ── Estados do formulário de contato ──
-    const [contactEmail, setContactEmail] = useState("")
-    const [contactMessage, setContactMessage] = useState("")
-    const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
-    const [formError, setFormError] = useState("")
-
-    // ── Melhoria: trava o scroll do HTML quando o menu mobile está aberto ──
     useEffect(() => {
         const html = document.querySelector("html")
         if (html) {
             html.style.overflow = showMobileMenu ? "hidden" : "auto"
         }
     }, [showMobileMenu])
-
-    // ── Envio de e-mail via Netlify Function ──
-    async function sendContactEmail(e: React.FormEvent) {
-        e.preventDefault()
-        setFormStatus("sending")
-        setFormError("")
-
-        try {
-            const response = await fetch("/api/send-email", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: contactEmail, message: contactMessage }),
-            })
-
-            if (!response.ok) {
-                const body = await response.json().catch(() => ({}))
-                throw new Error(body.error ?? "Erro ao enviar mensagem.")
-            }
-
-            setFormStatus("success")
-            setContactEmail("")
-            setContactMessage("")
-        } catch (err: unknown) {
-            const msg = err instanceof Error ? err.message : "Erro inesperado."
-            setFormError(msg)
-            setFormStatus("error")
-        }
-    }
 
     return (
         <>
@@ -99,7 +65,6 @@ export default function Home() {
                         </ul>
                     </div>
 
-                    {/* Ações desktop (Login + Botão) */}
                     <div className="desktop-only">
                         <div className="flex items-center">
                             <a className="reverse-color ml-lg" href="#">Login</a>
@@ -107,7 +72,6 @@ export default function Home() {
                         </div>
                     </div>
 
-                    {/* Menu mobile */}
                     <div className="mobile-menu">
                         {showMobileMenu ? (
                             <div className="mobile-menu-content">
@@ -123,7 +87,7 @@ export default function Home() {
                                             <a href="#testimonials" onClick={() => setShowMobileMenu(false)}>Depoimentos</a>
                                         </li>
                                         <li>
-                                            <a href="#pricing" onClick={() => setShowMobileMenu(false)}>Preços</a>
+                                            <a href="#pricing" onClick={() => setShowMobileMenu(false)}>Planos</a>
                                         </li>
                                         <li>
                                             <a href="#contact" onClick={() => setShowMobileMenu(false)}>Contato</a>
@@ -153,12 +117,10 @@ export default function Home() {
                 </nav>
             </header>
 
-            {/* Spacer para compensar header fixo */}
             <div style={{ height: "72px" }} />
 
             <main>
 
-                {/* ── Section Hero ── */}
                 <section id="hero">
                     <span className="hero-bg">
                         <img src={HeroRectangleTwo} alt="Fundo floral Amour Beauty" />
@@ -187,7 +149,6 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* ── Section Serviços (Solutions) ── */}
                 <section className="container" id="services">
 
                     <header>
@@ -228,7 +189,6 @@ export default function Home() {
 
                 </section>
 
-                {/* ── Section Depoimentos ── */}
                 <section id="testimonials">
 
                     <header>
@@ -243,7 +203,6 @@ export default function Home() {
                         </p>
                     </header>
 
-                    {/* Carrossel — duplicado para loop infinito perfeito */}
                     <section className="carousel">
                         <div className="carousel-content">
                             <TestimonialCard
@@ -269,7 +228,6 @@ export default function Home() {
                             />
                         </div>
 
-                        {/* Segunda cópia para loop infinito ── */}
                         <div className="carousel-content">
                             <TestimonialCard
                                 profileImage={ArianaImg}
@@ -297,7 +255,6 @@ export default function Home() {
 
                 </section>
 
-                {/* ── Section Planos (Guia 5) ── */}
                 <section id="pricing" className="container">
 
                     <header>
@@ -330,7 +287,6 @@ export default function Home() {
                             </span>
                         </div>
 
-                        {/* Plano Premium (destaque) */}
                         <div className="pricing-card premium">
                             <span className="bonus">
                                 <p>1º MÊS COM DESCONTO</p>
@@ -363,7 +319,6 @@ export default function Home() {
                             </span>
                         </div>
 
-                        {/* Plano VIP Luxo */}
                         <div className="pricing-card">
                             <span className="plan">
                                 <h3>VIP Luxo</h3>
@@ -397,7 +352,6 @@ export default function Home() {
 
                 </section>
 
-                {/* ── Section Contato ── */}
                 <section id="contact" className="container">
 
                     <header>
@@ -410,51 +364,15 @@ export default function Home() {
                         </p>
                     </header>
 
-                    <form onSubmit={sendContactEmail}>
-                        <input
-                            type="email"
-                            placeholder="Seu melhor Email"
-                            id="contact-email"
-                            value={contactEmail}
-                            onChange={(e) => setContactEmail(e.target.value)}
-                            required
-                            disabled={formStatus === "sending"}
-                        />
-                        <textarea
-                            placeholder="Motivo do contato. Ex: Gostaria de agendar uma coloração, qual o valor?"
-                            id="contact-message"
-                            value={contactMessage}
-                            onChange={(e) => setContactMessage(e.target.value)}
-                            required
-                            disabled={formStatus === "sending"}
-                        />
-
-                        {/* Feedback de status */}
-                        {formStatus === "success" && (
-                            <p className="form-feedback form-success">
-                                ✔ Mensagem enviada com sucesso! Entraremos em contato em breve.
-                            </p>
-                        )}
-                        {formStatus === "error" && (
-                            <p className="form-feedback form-error">
-                                ⚠️ {formError}
-                            </p>
-                        )}
-
-                        <Button
-                            text={formStatus === "sending" ? "Enviando..." : "Enviar"}
-                        />
-                    </form>
+                    <ContactForm />
 
                 </section>
 
             </main>
 
-            {/* ── Footer ── */}
             <footer>
                 <div className="container footer-content">
 
-                    {/* Coluna: Logo + Redes Sociais */}
                     <div className="footer-brand">
                         <img
                             src={Logo}
@@ -475,7 +393,6 @@ export default function Home() {
                         </div>
                     </div>
 
-                    {/* Coluna: Salão */}
                     <div className="footer-links">
                         <h4>Salão</h4>
                         <ul>
@@ -485,7 +402,6 @@ export default function Home() {
                         </ul>
                     </div>
 
-                    {/* Coluna: Serviços */}
                     <div className="footer-links">
                         <h4>Serviços</h4>
                         <ul>
@@ -496,7 +412,6 @@ export default function Home() {
                         </ul>
                     </div>
 
-                    {/* Coluna: Informações */}
                     <div className="footer-links">
                         <h4>Informações</h4>
                         <ul>

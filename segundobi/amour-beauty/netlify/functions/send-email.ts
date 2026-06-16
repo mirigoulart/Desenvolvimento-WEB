@@ -104,7 +104,7 @@ const handler: Handler = async (event: HandlerEvent) => {
       from: `<${process.env.SMTP_USER}>`,
       replyTo: email,
       to: process.env.CONTACT_EMAIL,
-      subject: "[Amour Beauty] Nova mensagem Landing Page",
+      subject: "[Amour Beauty] Nova mensagem",
       text: message,
       html: `
         <h2>Nova mensagem de contato</h2>

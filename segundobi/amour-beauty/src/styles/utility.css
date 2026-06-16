@@ -1,4 +1,3 @@
-/* ── Padding vertical ── */
 .py-sm {
     padding-block: var(--py-sm);
 }
@@ -15,17 +14,14 @@
     padding-block: var(--py-xl);
 }
 
-/* ── Padding horizontal ── */
 .px-lg {
     padding-inline: var(--px-lg);
 }
 
-/* ── Visibilidade ── */
 .desktop-only {
     display: none;
 }
 
-/* ── Layout ── */
 .even-columns {
     display: grid;
     gap: 1rem;
@@ -47,7 +43,6 @@
     display: grid;
 }
 
-/* ── Espaçamentos ── */
 .gap-1 {
     gap: 1rem;
 }
@@ -61,14 +56,12 @@
     padding: 2px;
 }
 
-/* ── Container responsivo ── */
 .container {
     --max-width: 680px;
     width: min(var(--max-width), 100% - var(--px-lg) * 2);
     margin-inline: auto;
 }
 
-/* ── Media queries desktop ── */
 @media (width >= 1280px) {
     .container {
         --max-width: 1050px;

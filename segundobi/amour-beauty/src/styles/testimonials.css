@@ -1,4 +1,3 @@
-/* ── Seção principal ── */
 #testimonials {
     height: auto;
     background: var(--secondary-color);
@@ -9,7 +8,6 @@
     overflow: hidden;
 }
 
-/* ── Cabeçalho ── */
 #testimonials header {
     display: flex;
     text-align: center;
@@ -19,18 +17,15 @@
     align-items: center;
 }
 
-/* ── Primeiro filho do header (parágrafo desktop) ── */
 #testimonials header :first-child {
     color: var(--primary-color);
     font-weight: var(--fw-bold);
 }
 
-/* ── Parágrafos ── */
 #testimonials p {
     color: var(--second-text-color);
 }
 
-/* ── Carrossel (mobile: um card por vez) ── */
 .carousel {
     display: flex;
     width: 90vw;
@@ -43,7 +38,6 @@
     cursor: pointer;
 }
 
-/* ── Conteúdo do carrossel ── */
 .carousel-content {
     display: flex;
     gap: 1.5rem;
@@ -51,7 +45,6 @@
     animation: swipe 30000ms linear infinite;
 }
 
-/* ── Cartão de depoimento (mobile: largura total do carousel) ── */
 .carousel-card {
     display: flex;
     flex-direction: column;
@@ -71,13 +64,11 @@
     object-fit: cover;
 }
 
-/* ── Avaliação com estrelas ── */
 .rating {
     display: flex;
     margin-top: auto;
 }
 
-/* ── Nomes ── */
 .names {
     font-size: var(--fs-sm);
     font-weight: var(--fw-bold);
@@ -88,7 +79,6 @@
     font-size: var(--fs-base);
 }
 
-/* ── Animação de deslize ── */
 @keyframes swipe {
     0% {
         transform: translateX(0);
@@ -98,7 +88,6 @@
     }
 }
 
-/* ── Responsivo desktop ── */
 @media (width >= 580px) {
     #testimonials {
         gap: 5rem;

@@ -1,4 +1,3 @@
-/* ── Botão primário (rosé) ── */
 .btn-primary {
     width: 100%;
     background: var(--primary-color);
@@ -21,7 +20,6 @@
     transform: translateY(-2px);
 }
 
-/* ── Botão secundário (outline) ── */
 .btn-secondary {
     width: 100%;
     background: transparent;

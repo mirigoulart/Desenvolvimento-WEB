@@ -4,6 +4,7 @@ import nodemailer from "nodemailer";
 interface ContactPayload {
   email: string;
   message: string;
+  recaptchaToken: string; // ← ADICIONAR
 }
 
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? "";
@@ -14,15 +15,23 @@ const corsHeaders = (origin: string) => ({
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 });
 
+// ← FUNÇÃO NOVA
+async function verifyRecaptcha(token: string): Promise<boolean> {
+  const secret = process.env.RECAPTCHA_SECRET_KEY ?? "";
+  const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `secret=${secret}&response=${token}`,
+  });
+  const data = await res.json() as { success: boolean };
+  return data.success;
+}
+
 const handler: Handler = async (event: HandlerEvent) => {
   const origin = event.headers["origin"] ?? "";
 
   if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 204,
-      headers: corsHeaders(origin),
-      body: "",
-    };
+    return { statusCode: 204, headers: corsHeaders(origin), body: "" };
   }
 
   if (event.httpMethod !== "POST") {
@@ -34,7 +43,6 @@ const handler: Handler = async (event: HandlerEvent) => {
   }
 
   let payload: ContactPayload;
-
   try {
     payload = JSON.parse(event.body ?? "{}");
   } catch {
@@ -45,7 +53,24 @@ const handler: Handler = async (event: HandlerEvent) => {
     };
   }
 
-  const { email, message } = payload;
+  const { email, message, recaptchaToken } = payload; 
+
+  if (!recaptchaToken) {
+    return {
+      statusCode: 400,
+      headers: corsHeaders(origin),
+      body: JSON.stringify({ error: "Token reCAPTCHA ausente." }),
+    };
+  }
+
+  const isHuman = await verifyRecaptcha(recaptchaToken);
+  if (!isHuman) {
+    return {
+      statusCode: 400,
+      headers: corsHeaders(origin),
+      body: JSON.stringify({ error: "Verificação reCAPTCHA falhou. Tente novamente." }),
+    };
+  }
 
   if (!email?.trim() || !message?.trim()) {
     return {
@@ -99,9 +124,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     return {
       statusCode: 500,
       headers: corsHeaders(origin),
-      body: JSON.stringify({
-        error: "Falha ao enviar o e-mail. Tente novamente mais tarde.",
-      }),
+      body: JSON.stringify({ error: "Falha ao enviar o e-mail. Tente novamente mais tarde." }),
     };
   }
 };

@@ -1,4 +1,3 @@
-/* ── Container principal ── */
 #hero {
     background: var(--light-gray);
     border-top: 0.125rem solid var(--border-color);
@@ -8,7 +7,6 @@
     overflow: hidden;
 }
 
-/* ── Imagem de fundo (flores) — cobre todo o hero ── */
 #hero > span.hero-bg {
     position: absolute;
     inset: 0;
@@ -23,7 +21,6 @@
     display: block;
 }
 
-/* ── Overlay para legibilidade do texto ── */
 #hero > span.hero-bg::after {
     content: '';
     position: absolute;
@@ -36,12 +33,10 @@
     );
 }
 
-/* ── Cor do parágrafo no hero ── */
 #hero p {
     color: var(--second-text-color);
 }
 
-/* ── Conteúdo textual ── */
 #hero .content {
     z-index: 1;
     display: flex;
@@ -51,7 +46,6 @@
     gap: 1.75rem;
 }
 
-/* ── Div dos botões ── */
 #hero .content > div {
     display: flex;
     align-items: center;
@@ -61,27 +55,23 @@
     margin-bottom: 20%;
 }
 
-/* ── Span do botão visível no mobile ── */
 #hero .content > div > span:not(.desktop-only) {
     display: flex;
     align-items: center;
 }
 
-/* ── Botões: largura automática para caber o texto ── */
 #hero .content > div button {
     width: auto;
     white-space: nowrap;
     display: block;
 }
 
-/* ── Desktop ── */
 @media (width >= 1280px) {
     #hero {
         background: var(--bg-color);
         border-top: none;
     }
 
-    /* Overlay mais suave no desktop */
     #hero > span.hero-bg::after {
         background: linear-gradient(
             to right,
@@ -100,12 +90,10 @@
         gap: 2.5rem;
     }
 
-    /* remove restrição de largura que encolhia o botão */
     #hero .content > div button {
         width: auto;
     }
 
-    /* desktop-only spans ficam visíveis e alinhados */
     #hero .content > div > span.desktop-only {
         display: flex;
         align-items: center;

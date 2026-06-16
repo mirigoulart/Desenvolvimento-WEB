@@ -4,22 +4,18 @@ import Button from "./Button"
 
 const ContactForm = () => {
     const [formData, setFormData] = useState({ email: "", message: "" })
-    const [isChallengeCompleted, setChallengeCompleted] = useState(false)
+    const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
     const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
     const [formError, setFormError] = useState("")
     const recaptchaRef = useRef<ReCAPTCHA>(null)
 
     function isValidForm() {
         const isValidFields = formData.email.trim() !== "" && formData.message.trim() !== ""
-        return isValidFields && isChallengeCompleted
+        return isValidFields && !!recaptchaToken
     }
 
     function handleCompleteChallenge(token: string | null) {
-        if (!token) {
-            setChallengeCompleted(false)
-            return
-        }
-        setChallengeCompleted(true)
+        setRecaptchaToken(token)
     }
 
     function resetFields() {
@@ -30,7 +26,11 @@ const ContactForm = () => {
         const response = await fetch("/api/send-email", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: formData.email, message: formData.message }),
+            body: JSON.stringify({
+                email: formData.email,
+                message: formData.message,
+                recaptchaToken: recaptchaToken,
+            }),
         })
 
         if (!response.ok) {
@@ -44,7 +44,7 @@ const ContactForm = () => {
 
         if (!isValidForm()) return
 
-        setChallengeCompleted(false)
+        setRecaptchaToken(null)
         setFormStatus("sending")
         setFormError("")
 

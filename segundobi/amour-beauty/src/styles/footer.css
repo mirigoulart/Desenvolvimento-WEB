@@ -1,31 +1,26 @@
-/* ── Rodapé principal ── */
 footer {
     background: var(--primary-color);
     color: var(--light-text-color);
     padding-block: 3rem;
 }
 
-/* ── Conteúdo do footer (colunas) ── */
 .footer-content {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
 }
 
-/* ── Coluna da marca ── */
 .footer-brand {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
 }
 
-/* ── Logo no footer — inverte cor para branco ── */
 .footer-brand img.footer-logo {
     filter: brightness(0) invert(1);
     width: 140px;
 }
 
-/* ── Ícones sociais ── */
 .social-icons {
     display: flex;
     gap: 1rem;
@@ -55,7 +50,6 @@ footer {
     filter: brightness(0) invert(1);
 }
 
-/* ── Colunas de links ── */
 .footer-links {
     display: flex;
     flex-direction: column;
@@ -88,7 +82,6 @@ footer {
     color: white;
 }
 
-/* ── Barra inferior ── */
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.25);
     margin-top: 2.5rem;
@@ -101,7 +94,6 @@ footer {
     font-size: var(--fs-sm);
 }
 
-/* ── Desktop ── */
 @media (width >= 1280px) {
     footer {
         background: var(--bg-color);
